@@ -1,16 +1,17 @@
 package com.omelchenkoaleks.playingaudio;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     MediaPlayer mMediaPlayer;
     Button mPlayPauseButton;
+    Drawable mColorBackground;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
          */
 
         mPlayPauseButton = findViewById(R.id.play_button);
+        mColorBackground = mPlayPauseButton.getBackground();
+
         mPlayPauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -31,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
                     pause();
                 } else {
                     play();
+                    mPlayPauseButton.setBackgroundColor(getColor(R.color.colorAccent));
                 }
             }
         });
@@ -47,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     public void pause() {
         mMediaPlayer.pause();
         mPlayPauseButton.setText(R.string.pause);
+        mPlayPauseButton.setBackground(mColorBackground);
     }
 
 }
