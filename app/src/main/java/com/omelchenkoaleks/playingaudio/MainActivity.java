@@ -1,10 +1,13 @@
 package com.omelchenkoaleks.playingaudio;
 
 import android.graphics.drawable.Drawable;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SeekBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,20 +15,41 @@ public class MainActivity extends AppCompatActivity {
     MediaPlayer mMediaPlayer;
     Button mPlayPauseButton;
     Drawable mColorBackground;
+    SeekBar mVolumeSeekBar;
+    AudioManager mAudioManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*
-            Аудио может воспроизводится без отображения -
-                не нужна разметка
-                т.к. нет привязки к ui можно получить контекст всего приложения
-         */
+        // нужен для контроля над звуком (связать звук с SeekBar)
+        mAudioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+        int maxVolume = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 
         mPlayPauseButton = findViewById(R.id.play_button);
         mColorBackground = mPlayPauseButton.getBackground();
+
+        mVolumeSeekBar = findViewById(R.id.volume_seek_bar);
+        mVolumeSeekBar.setMax(maxVolume);
+        mVolumeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                Log.d("Progress changed", "" + progress);
+                mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
 
         mPlayPauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
