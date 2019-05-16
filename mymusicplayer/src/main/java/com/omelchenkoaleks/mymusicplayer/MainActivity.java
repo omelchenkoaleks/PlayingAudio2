@@ -30,6 +30,28 @@ public class MainActivity extends AppCompatActivity {
         mMediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.stuff);
         mSeekBar.setMax(mMediaPlayer.getDuration());
 
+        /*
+            нужен слушатель, чтобы реализовать возможность перемотки SeekBar ...
+         */
+        mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (fromUser) {
+                    mMediaPlayer.seekTo(progress);
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
