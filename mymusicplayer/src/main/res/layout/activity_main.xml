@@ -72,10 +72,11 @@
         android:layout_marginBottom="148dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/circle_background" />
+        app:srcCompat="@drawable/circle_background"
+        android:onClick="previous"/>
 
     <ImageView
-        android:id="@+id/prvious_imageButton"
+        android:id="@+id/previous_imageButton"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="60dp"
@@ -92,7 +93,8 @@
         android:layout_marginBottom="148dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/circle_background" />
+        app:srcCompat="@drawable/circle_background"
+        android:onClick="next"/>
 
     <ImageView
         android:id="@+id/next_imageButton2"
@@ -115,7 +117,8 @@
         app:layout_constraintEnd_toStartOf="@+id/imageButton2"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toEndOf="@+id/imageButton"
-        app:srcCompat="@drawable/circle_background" />
+        app:srcCompat="@drawable/circle_background"
+        android:onClick="play"/>
 
     <ImageView
         android:id="@+id/play_imageButton3"
